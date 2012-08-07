@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SaxStatePattern" default="javadoc">
+
+	<property name="build.dest" location="build"/>
+	<property name="dist.dest" location="dist"/>
+	<property name="doc.dest" location="${build.dest}/doc"/>
+	<property name="api.dest" location="${doc.dest}/api"/>
+
+	<property name="doc.dir" location="doc"/>
+	<property name="etc.dir" location="etc"/>
+	<property name="lib.dir" location="lib"/>
+	<property name="src.dir" location="src"/>
+
+	<property name="doc.format" value="html"/>
+
+	<path id="project.classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef name="stxt" classpathref="project.classpath"
+	         classname="com.valentsolutions.stxt.StxtProcessorTask"/>
+
+	<target name="contract" description="Instruments the code with iContract">
+		<mkdir dir="${build.dest}/src"/>
+		<mkdir dir="${build.dest}/classes"/>
+	    <copy todir="${build.dest}/src" filtering="on">
+	    	<fileset dir="${src.dir}">
+	    		<include name="**/*.java"/>
+	    	</fileset>
+	    </copy>
+	    
+	    <javac srcdir="${build.dest}/src" destdir="${build.dest}/classes"/>
+
+		<icontract srcdir="${build.dest}/src" classdir="${build.dest}/classes"
+		           instrumentdir="${build.dest}/instrument"
+                 repositorydir="${build.dest}/repository"
+		           builddir="${build.dest}/instbuild"/>
+	</target>
+
+    <target name="javadoc">
+        <javadoc destdir="${api.dest}" access="protected"
+            packagenames="com.valentsolutions.*"
+            sourcepath="${src.dir}" classpath="${build.dest}">
+			<!--<doclet name="iContract.doclet.Standard" path="/usr/local/java/iDoclet.jar">
+				<param name="-author"/>
+				<param name="-use"/>
+			</doclet>-->
+        </javadoc>
+	</target>
+
+ 	<target name="documentation" description="Generate Documentation">
+		<stxt dest="${doc.dest}" format="${doc.format}">
+			<fileset dir=".">
+				<include name="**/README.stxt"/>
+			</fileset>
+			<fileset dir="${doc.dir}"/>
+		</stxt>
+
+		<copy todir="${doc.dest}/manual">
+			<fileset dir="${etc.dir}">
+				<include name="stxt.css"/>
+				<include name="stxt.dtd"/>
+				<include name="stxt.xsd"/>
+			</fileset>
+		</copy>
+
+		<antcall target="javadoc"/>
+	</target>
+</project>

@@ -1,0 +1,13 @@
+<BankAccounts>
+   <Account>
+      <CustomerName>
+         <Prefix></Prefix>?
+         <First></First>
+         <Middle></Middle>?
+         <Last></Last>
+         <Suffix></Suffix>?
+      </CustomerName>
+      <DateOpened></DateOpened>
+      <Balance></Balance>
+   </Account>
+</BankAccounts>

@@ -1,0 +1,37 @@
++++++
+Title: SAXStatePattern Readme
+Author: Valent Solutions Inc.
+Revision: $Revision:$
++++++
+
+= SAXStatePattern Readme ========================
+
+The SAXStatePattern library provides a framework to simplify SAX parsing.
+
+Currently, we have no examples or tests, but it is used in our Xtract project.
+We will make a simple example that exercises all of the features soon.
+
+== Dependencies =======
+
+We use [http://eclipse.org/ | Eclipse] as our development environment.
+
+=== Running
+
+* [http://java.sun.com/j2se/1.3/ | Java 2 v 1.3]
+* A SAX2 implementation, like [http://xml.apache.org/xerces-j/ | Xerces] (not
+  necessary if you have at least Java 2 v 1.4)
+
+=== Building
+
+* [http://ant.apache.org/ | Ant] or [http://eclipse.org/ | Eclipse]
+
+=== Documentation
+
+* [http://icplus.sourceforge.net/iDoclet.html | iDoclet] extends Javadoc with
+  support for including contracts in the documentation
+
+=== Testing
+
+* [http://www.reliable-systems.com/tools/iContract/iContract.htm | iContract]
+  adds support for Design-By-Contract
+* [http://junit.org/ | JUnit] is a standard unit-testing framework for Java

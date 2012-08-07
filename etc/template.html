@@ -1,0 +1,25 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+				xmlns:stxt="http://valentsoftware.com/stxt"
+				xmlns="http://www.w3.org/1999/xhtml"
+				version="1.0">
+
+	<xsl:variable name="initial_header" select="2"/>	
+
+	<xsl:template match="/">
+		<xsl:if test="stxt:stxtDocument/stxt:metadata/stxt:header[@key='title']">
+			<h1><xsl:value-of select="stxt:stxtDocument/stxt:metadata/stxt:header[@key='title']"/></h1>
+		</xsl:if>
+		<xsl:if test="stxt:stxtDocument/stxt:metadata/stxt:header[@key='author']">
+			<div class="byline">
+				<xsl:value-of select="stxt:stxtDocument/stxt:metadata/stxt:header[@key='author']"/>
+			</div>
+		</xsl:if>
+		<xsl:if test="stxt:stxtDocument/stxt:metadata/stxt:header[@key='summary']">
+			<div class="summary">
+				<xsl:value-of select="stxt:stxtDocument/stxt:metadata/stxt:header[@key='summary']"/>
+			</div>
+		</xsl:if>
+
+    	<xsl:apply-templates select="stxt:stxtDocument/stxt:body"/>
+	</xsl:template>
+</xsl:stylesheet>
